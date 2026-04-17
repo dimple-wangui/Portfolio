@@ -28,7 +28,7 @@ The primary outcome is a binary indicator of malaria status (`malaria_status`, c
    - Produce a publication-ready summary table.
 
 ## Results
-Results are generated programmatically in `scripts/02_logistic_regression_analysis.R` and exported to:
+Results are generated programmatically in `scripts/02_logistic_regression_analysis.Rmd` and exported to:
 
 - `outputs/model_summary.txt`
 - `outputs/odds_ratios_95ci.csv`
@@ -45,8 +45,8 @@ Epidemiology-Model/
 │   └── malaria_data.csv              # Placeholder dataset name
 ├── outputs/                          # Analysis outputs (tables and figures)
 ├── scripts/
-│   ├── 01_exploratory_data_analysis.R
-│   └── 02_logistic_regression_analysis.R
+│   ├── 01_exploratory_data_analysis.Rmd
+│   └── 02_logistic_regression_analysis.Rmd
 ├── .gitignore
 ├── requirements.txt
 └── README.md
@@ -55,7 +55,7 @@ Epidemiology-Model/
 ## Reproducibility
 Install required R packages listed in `requirements.txt`, then run:
 
-1. `scripts/01_exploratory_data_analysis.R`
-2. `scripts/02_logistic_regression_analysis.R`
+1. `scripts/01_exploratory_data_analysis.Rmd`
+2. `scripts/02_logistic_regression_analysis.Rmd`
 
 All scripts assume the working directory is the project root.

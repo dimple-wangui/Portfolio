@@ -1,3 +1,26 @@
+---
+title: "Logistic Regression Analysis: Socio-Economic Predictors of Malaria"
+author: "Applied Statistics Portfolio Project"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+---
+
+## Introduction
+
+This report estimates the association between socio-economic factors and malaria status using a multivariable logistic regression model. The main inferential outputs are adjusted odds ratios and corresponding 95% confidence intervals.
+
+```{r setup, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Methodology
+
+### Load Packages and Data
+
+```{r load-packages, message=FALSE}
 required_packages <- c(
   "tidyverse",
   "janitor",
@@ -10,7 +33,9 @@ if (length(missing_packages) > 0) {
 }
 
 invisible(lapply(required_packages, library, character.only = TRUE))
+```
 
+```{r load-data}
 data_path <- file.path("data", "malaria_data.csv")
 output_dir <- "outputs"
 if (!dir.exists(output_dir)) {
@@ -19,10 +44,6 @@ if (!dir.exists(output_dir)) {
 
 malaria_data <- readr::read_csv(data_path, show_col_types = FALSE) |>
   janitor::clean_names()
-
-# Expected example columns:
-# malaria_status (0/1), age, sex, household_income, education_years,
-# household_size, bed_net_use, distance_to_clinic_km, housing_quality
 
 analysis_data <- malaria_data |>
   dplyr::mutate(
@@ -43,17 +64,42 @@ analysis_data <- malaria_data |>
     housing_quality
   ) |>
   tidyr::drop_na()
+```
 
+### Key Data Objects (Printed Output)
+
+```{r object-output-analysis-data}
+dim(analysis_data)
+head(analysis_data, 10)
+summary(analysis_data)
+```
+
+```{r fit-model}
 logit_model <- stats::glm(
   malaria_status ~ household_income + education_years + household_size +
     bed_net_use + distance_to_clinic_km + age + sex + housing_quality,
   data = analysis_data,
   family = stats::binomial(link = "logit")
 )
+```
 
-model_summary_capture <- utils::capture.output(summary(logit_model))
+## Results
+
+### Logistic Regression Summary
+
+```{r model-summary}
+model_summary <- summary(logit_model)
+model_summary
+```
+
+```{r export-model-summary}
+model_summary_capture <- utils::capture.output(model_summary)
 writeLines(model_summary_capture, con = file.path(output_dir, "model_summary.txt"))
+```
 
+### Odds Ratios with 95% Confidence Intervals
+
+```{r odds-ratio-table}
 odds_ratio_table <- broom::tidy(
   logit_model,
   conf.int = TRUE,
@@ -73,7 +119,25 @@ odds_ratio_table <- broom::tidy(
     )
   )
 
-readr::write_csv(odds_ratio_table, file.path(output_dir, "odds_ratios_95ci.csv"))
+odds_ratio_table
+```
 
-message("Logistic regression analysis complete.")
-message("Outputs saved to outputs/model_summary.txt and outputs/odds_ratios_95ci.csv.")
+```{r export-odds-ratios}
+readr::write_csv(odds_ratio_table, file.path(output_dir, "odds_ratios_95ci.csv"))
+```
+
+### Model Fit Statistics (Optional Diagnostic Output)
+
+```{r model-fit-stats}
+fit_stats <- tibble::tibble(
+  metric = c("AIC", "BIC", "Null Deviance", "Residual Deviance"),
+  value = c(
+    AIC(logit_model),
+    BIC(logit_model),
+    logit_model$null.deviance,
+    logit_model$deviance
+  )
+)
+
+fit_stats
+```

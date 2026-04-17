@@ -1,0 +1,10 @@
+term,odds_ratio,std.error,statistic,p_value,ci_lower_95,ci_upper_95
+(Intercept),13011641793166406,104802.98658730785,3.5404163643057803e-4,0.9997,0,NA
+household_income,0.8937,267.88141932040014,-4.194136674322874e-4,0.9997,NA,1652532727773101e3
+education_years,NA,NA,NA,NA,NA,NA
+household_size,NA,NA,NA,NA,NA,NA
+bed_net_use1,NA,NA,NA,NA,NA,NA
+distance_to_clinic_km,NA,NA,NA,NA,NA,NA
+age,NA,NA,NA,NA,NA,NA
+sexMale,NA,NA,NA,NA,NA,NA
+housing_qualityPoor,NA,NA,NA,NA,NA,NA

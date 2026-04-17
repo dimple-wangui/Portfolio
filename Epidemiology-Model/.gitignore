@@ -9,11 +9,6 @@
 renv/library/
 renv/staging/
 
-# Output artifacts
-outputs/*.png
-outputs/*.csv
-outputs/*.txt
-!outputs/.gitkeep
 
 # OS files
 .DS_Store

@@ -1,0 +1,27 @@
+
+Call:
+stats::glm(formula = malaria_status ~ household_income + education_years + 
+    household_size + bed_net_use + distance_to_clinic_km + age + 
+    sex + housing_quality, family = stats::binomial(link = "logit"), 
+    data = analysis_data)
+
+Coefficients: (7 not defined because of singularities)
+                        Estimate Std. Error z value Pr(>|z|)
+(Intercept)            3.710e+01  1.048e+05       0        1
+household_income      -1.124e-01  2.679e+02       0        1
+education_years               NA         NA      NA       NA
+household_size                NA         NA      NA       NA
+bed_net_use1                  NA         NA      NA       NA
+distance_to_clinic_km         NA         NA      NA       NA
+age                           NA         NA      NA       NA
+sexMale                       NA         NA      NA       NA
+housing_qualityPoor           NA         NA      NA       NA
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2.7726e+00  on 1  degrees of freedom
+Residual deviance: 2.3305e-10  on 0  degrees of freedom
+AIC: 4
+
+Number of Fisher Scoring iterations: 22
+
