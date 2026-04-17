@@ -1,0 +1,9 @@
+# R package dependencies for this project
+# Install via:
+# R -e "install.packages(readLines('requirements.txt'))"
+
+tidyverse
+janitor
+GGally
+scales
+broom
